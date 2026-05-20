@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Gallery — AI Visual & Prompt Assets | Tisnaantzo</title>
+  <meta name="description" content="Koleksi AI visual dan prompt assets karya Tisnaantzo. Temukan inspirasi desain poster travel, streetwear, dan karya kreatif lainnya lengkap dengan promptnya." />
+  <meta name="author" content="Tisnaantzo" />
+  <meta property="og:title" content="Prompt Gallery — AI Visual & Prompt Assets | Tisnaantzo" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tisnaantzo.xyz/galleryprompt" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0e;
+      --surface: #141417;
+      --surface2: #1c1c21;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #f0eff4;
+      --muted: #7a7a8c;
+      --accent: #c8f542;
+      --accent2: #a8e020;
+      --accent-glow: rgba(200,245,66,0.15);
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: rgba(12,12,14,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text);
+      background: var(--surface2);
+    }
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 72px 32px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(200,245,66,0.25);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .hero-badge::before { content: '◉'; font-size: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+
+    /* ── COFFEE BUTTON ── */
+    .coffee-wrap { position: relative; display: inline-block; margin-bottom: 40px; }
+
+    .coffee-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .coffee-btn:hover { border-color: var(--border-hover); background: #22222a; }
+    .coffee-btn .arrow { font-size: 10px; transition: transform 0.2s; }
+    .coffee-btn.open .arrow { transform: rotate(180deg); }
+
+    .coffee-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px;
+      min-width: 180px;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 50;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .coffee-dropdown.open { display: flex; }
+    .coffee-dropdown a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .coffee-dropdown a:hover { background: var(--surface2); }
+
+    .coffee-poem {
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 380px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      max-width: 1200px;
+      margin: 0 auto 32px;
+      padding: 0 32px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-label { font-size: 12px; color: var(--muted); margin-right: 4px; }
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--border-hover); color: var(--text); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #0c0c0e; font-weight: 600; }
+
+    /* ── GALLERY GRID ── */
+    .gallery-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    .gallery-grid {
+      columns: 3;
+      column-gap: 16px;
+    }
+    @media (max-width: 900px) { .gallery-grid { columns: 2; } }
+    @media (max-width: 560px) { .gallery-grid { columns: 1; } }
+
+    .card {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      animation: fadeUp 0.5s ease both;
+    }
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border-hover);
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface2);
+    }
+    .card-img-wrap img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .card-img-wrap img { transform: scale(1.04); }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,12,14,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .card:hover .card-overlay { opacity: 1; }
+
+    .copy-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #0c0c0e;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 100px;
+    }
+
+    .card-body { padding: 14px 16px 16px; }
+
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .tag.ai { color: var(--accent); border-color: rgba(200,245,66,0.2); background: var(--accent-glow); }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-prompt {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .card-tool {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .copy-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { background: var(--accent-glow); border-color: var(--accent); color: var(--accent); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.25s;
+    }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+
+    .modal-img { width: 100%; display: block; border-radius: 16px 16px 0 0; }
+
+    .modal-body { padding: 24px 28px 28px; }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .modal-prompt-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .modal-prompt-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .modal-actions { display: flex; gap: 10px; }
+
+    .btn-copy-full {
+      flex: 1;
+      background: var(--accent);
+      border: none;
+      color: #0c0c0e;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-copy-full:hover { background: var(--accent2); }
+    .btn-copy-full:active { transform: scale(0.98); }
+    .btn-copy-full.copied { background: #2d6a0a; color: #a8e020; }
+
+    .btn-close {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-close:hover { border-color: var(--border-hover); color: var(--text); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 16px;
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-links { display: flex; gap: 6px; }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: var(--accent);
+      color: #0c0c0e;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 10px;
+      z-index: 300;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">tisna<span>antzo</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#" class="active">Gallery Prompt</a></li>
+    <li><a href="#">Service</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">AI Visual Assets</div>
+  <h1>Prompt<br><em>Gallery</em></h1>
+  <p>Koleksi visual AI lengkap dengan prompt aslinya. Klik kartu untuk lihat & copy prompt secara penuh.</p>
+
+  <!-- Coffee Button -->
+  <div class="coffee-wrap">
+    <button class="coffee-btn" id="coffeeBtn">
+      ☕ Traktir Saya Kopi <span class="arrow">▼</span>
+    </button>
+    <div class="coffee-dropdown" id="coffeeDropdown">
+      <a href="https://saweria.co/tisnaantzo" target="_blank">🟡 Saweria</a>
+      <a href="https://ko-fi.com/tisnaantzo" target="_blank">☕ Ko-fi</a>
+      <a href="https://trakteer.id/tisnaantzo/tip" target="_blank">❤️ Trakteer</a>
+    </div>
+  </div>
+
+  <div class="coffee-poem">
+    Hujan turun di sore hari,<br/>
+    Tanah basah semerbak wangi.<br/>
+    Kalau konten ini jadi inspirasi,<br/>
+    Bolehlah secangkir kopi jadi tanda hati 🙏
+  </div>
+</section>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-filter="all">Semua</button>
+  <button class="filter-btn" data-filter="travel">Travel Poster</button>
+  <button class="filter-btn" data-filter="streetwear">Streetwear</button>
+  <button class="filter-btn" data-filter="portrait">Portrait</button>
+  <button class="filter-btn" data-filter="nature">Nature</button>
+  <button class="filter-btn" data-filter="abstract">Abstract</button>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <img src="" alt="" id="modalImg" class="modal-img" />
+    <div class="modal-body">
+      <div class="card-tags" id="modalTags"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-prompt-label">✦ Prompt</div>
+      <div class="modal-prompt-box" id="modalPrompt"></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:14px;" id="modalTool"></div>
+      <div class="modal-actions">
+        <button class="btn-copy-full" id="btnCopyFull">Copy Prompt</button>
+        <button class="btn-close" id="btnClose">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Prompt berhasil disalin!</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">tisna<span>antzo</span></div>
+    <div class="footer-copy" style="margin-top:4px;">© 2025 tisnaantzo. All rights reserved.</div>
+  </div>
+  <nav class="footer-links">
+    <a href="#">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">About</a>
+  </nav>
+</footer>
+
+<script>
+  // ── DATA ──
+  const items = [
+    {
+      id: 1,
+      category: 'travel',
+      title: 'Bali Sunset Poster',
+      tool: 'Midjourney v6.1',
+      img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80',
+      tags: ['Travel Poster', 'AI'],
+      prompt: 'A cinematic travel poster of Bali at golden hour sunset, silhouette of temple against dramatic orange-pink sky, rice terraces in foreground, vintage travel aesthetic, film grain, letterpress typography "BALI" at top, warm tones, high contrast, photorealistic, editorial style --ar 2:3 --v 6.1 --style raw'
+    },
+    {
+      id: 2,
+      category: 'streetwear',
+      title: 'Urban Streetwear Lookbook',
+      tool: 'Flux Pro 1.1',
+      img: 'https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=600&q=80',
+      tags: ['Streetwear', 'AI'],
+      prompt: 'Editorial fashion photography, young Indonesian male model wearing oversized graphic hoodie and cargo pants, urban Jakarta background with graffiti walls, moody dramatic lighting, desaturated cinematic colors, street photography style, shot on film, authentic gritty aesthetic, 4k resolution --ar 3:4'
+    },
+    {
+      id: 3,
+      category: 'portrait',
+      title: 'Analog Portrait Session',
+      tool: 'Midjourney v6.1',
+      img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80',
+      tags: ['Portrait', 'AI'],
+      prompt: 'Film photography portrait of Southeast Asian woman, natural light from window, analog film grain, Kodak Portra 400 aesthetic, soft bokeh background, candid expression, warm color grading, medium format camera feel, authentic intimate moment, no filters, raw emotion --ar 4:5 --v 6 --style raw --q 2'
+    },
+    {
+      id: 4,
+      category: 'travel',
+      title: 'Tokyo Night Poster',
+      tool: 'Adobe Firefly',
+      img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80',
+      tags: ['Travel Poster', 'AI'],
+      prompt: 'Neon-lit Tokyo at night, rain-soaked streets reflecting neon signs, cyberpunk aesthetic, overhead shot of Shinjuku crossing, vivid cyan and magenta color palette, long exposure light trails, cinematic anamorphic lens flare, Japanese text on signs, moody and atmospheric, poster format --ar 2:3'
+    },
+    {
+      id: 5,
+      category: 'nature',
+      title: 'Raja Ampat Aerial',
+      tool: 'Ideogram v2',
+      img: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&q=80',
+      tags: ['Nature', 'AI'],
+      prompt: 'Stunning aerial drone shot of Raja Ampat islands Indonesia, crystal clear turquoise water, limestone karst islands covered in dense jungle, overwater bungalow in distance, golden hour lighting, perfectly flat water with reflections, paradise tropical destination, ultra sharp details, Google Earth aesthetic --ar 16:9'
+    },
+    {
+      id: 6,
+      category: 'abstract',
+      title: 'Liquid Chrome Sculpture',
+      tool: 'Midjourney v6.1',
+      img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+      tags: ['Abstract', 'AI'],
+      prompt: 'Hyperrealistic liquid chrome mercury sculpture on black marble surface, dramatic studio lighting, perfect reflections, surreal organic form, high contrast, product photography style, glossy finish, 8k resolution, studio white backdrop, luxury aesthetic, premium material feel --ar 1:1 --v 6.1 --q 2'
+    },
+    {
+      id: 7,
+      category: 'streetwear',
+      title: 'Jogja Batik Fusion',
+      tool: 'Stable Diffusion XL',
+      img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80',
+      tags: ['Streetwear', 'AI'],
+      prompt: 'Contemporary fashion editorial, Indonesian model wearing modern streetwear with traditional batik pattern integration, Prambanan temple background, golden hour, Vogue magazine aesthetic, high fashion photography, dramatic poses, luxury brand feel, cultural fusion concept, professionally lit --ar 3:4'
+    },
+    {
+      id: 8,
+      category: 'nature',
+      title: 'Bromo Volcano Dawn',
+      tool: 'Midjourney v6.1',
+      img: 'https://images.unsplash.com/photo-1540276048-ca2ecdbf5c36?w=600&q=80',
+      tags: ['Nature', 'AI'],
+      prompt: 'Mount Bromo at dawn, sea of clouds below crater rim, dramatic volcanic landscape East Java Indonesia, warm golden first light, silhouette of local farmers on horseback, ethereal misty atmosphere, wide angle landscape photography, epic scale, National Geographic style, ultra detailed, 8k --ar 16:9 --style raw'
+    },
+    {
+      id: 9,
+      category: 'abstract',
+      title: 'Neon Geometry Burst',
+      tool: 'Flux Pro 1.1',
+      img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80',
+      tags: ['Abstract', 'AI'],
+      prompt: 'Abstract digital art, exploding geometric shapes, neon color spectrum on deep black background, mathematical precision, sacred geometry patterns, glowing edges with lens flare, cyberpunk palette cyan magenta yellow, motion blur, high energy composition, cover art aesthetic, 4k resolution --ar 1:1'
+    },
+    {
+      id: 10,
+      category: 'portrait',
+      title: 'Wayang Shadow Portrait',
+      tool: 'Ideogram v2',
+      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
+      tags: ['Portrait', 'AI'],
+      prompt: 'Dramatic portrait inspired by Indonesian wayang shadow puppet aesthetics, man in profile with strong geometric jawline, dramatic side lighting creating sharp shadows, traditional Javanese batik fabric as background, high contrast black and white with selective red accent color, artistic cultural fusion portrait --ar 4:5'
+    },
+    {
+      id: 11,
+      category: 'travel',
+      title: 'Sumatra Jungle Poster',
+      tool: 'Midjourney v6.1',
+      img: 'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=600&q=80',
+      tags: ['Travel Poster', 'AI'],
+      prompt: 'Vintage adventure travel poster of Sumatra jungle, orangutan in dense rainforest canopy, lush tropical greens, retro 1960s poster design style, limited color palette, bold typography "WILD SUMATRA", screen print texture, conservation message, artistic illustration style, warm earthy tones --ar 2:3'
+    },
+    {
+      id: 12,
+      category: 'nature',
+      title: 'Komodo Dragon Dusk',
+      tool: 'Adobe Firefly',
+      img: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=600&q=80',
+      tags: ['Nature', 'AI'],
+      prompt: 'Komodo dragon on rocky hillside at dusk, golden backlight creating dramatic silhouette, Komodo island Indonesia background, wildlife photography aesthetic, telephoto compression, dust particles visible in golden light, epic prehistoric atmosphere, David Attenborough documentary feel, cinematic wide shot --ar 16:9 --style raw'
+    }
+  ];
+
+  // ── RENDER GRID ──
+  let activeFilter = 'all';
+  const grid = document.getElementById('galleryGrid');
+
+  function renderCards(filter) {
+    const filtered = filter === 'all' ? items : items.filter(i => i.category === filter);
+    grid.innerHTML = '';
+    filtered.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.animationDelay = `${idx * 0.06}s`;
+      card.dataset.id = item.id;
+      card.innerHTML = `
+        <div class="card-img-wrap">
+          <img src="${item.img}" alt="${item.title}" loading="lazy" />
+          <div class="card-overlay">
+            <span class="copy-hint">👁 Lihat Prompt</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            ${item.tags.map(t => `<span class="tag ${t==='AI'?'ai':''}">${t}</span>`).join('')}
+          </div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-prompt">${item.prompt}</div>
+          <div class="card-footer">
+            <span class="card-tool">🛠 ${item.tool}</span>
+            <button class="copy-btn" data-id="${item.id}">📋 Copy</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Card click → modal
+    grid.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.classList.contains('copy-btn')) return;
+        openModal(parseInt(card.dataset.id));
+      });
+    });
+
+    // Copy btn
+    grid.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const item = items.find(i => i.id === parseInt(btn.dataset.id));
+        if (item) copyToClipboard(item.prompt, btn);
+      });
+    });
+  }
+
+  renderCards('all');
+
+  // ── FILTER ──
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderCards(activeFilter);
+    });
+  });
+
+  // ── MODAL ──
+  const overlay = document.getElementById('modalOverlay');
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalPrompt = document.getElementById('modalPrompt');
+  const modalTool = document.getElementById('modalTool');
+  const modalTags = document.getElementById('modalTags');
+  const btnCopyFull = document.getElementById('btnCopyFull');
+
+  function openModal(id) {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+    modalImg.src = item.img;
+    modalImg.alt = item.title;
+    modalTitle.textContent = item.title;
+    modalPrompt.textContent = item.prompt;
+    modalTool.textContent = `🛠 Dibuat dengan: ${item.tool}`;
+    modalTags.innerHTML = item.tags.map(t => `<span class="tag ${t==='AI'?'ai':''}">${t}</span>`).join('');
+    btnCopyFull.textContent = 'Copy Prompt';
+    btnCopyFull.className = 'btn-copy-full';
+    btnCopyFull.onclick = () => copyToClipboard(item.prompt, btnCopyFull, true);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.getElementById('btnClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── COPY ──
+  function copyToClipboard(text, btn, isModal = false) {
+    navigator.clipboard.writeText(text).then(() => {
+      if (isModal) {
+        btn.textContent = '✓ Berhasil Disalin!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy Prompt';
+          btn.classList.remove('copied');
+        }, 2000);
+      } else {
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '📋 Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+      showToast();
+    });
+  }
+
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // ── COFFEE DROPDOWN ──
+  const coffeeBtn = document.getElementById('coffeeBtn');
+  const coffeeDropdown = document.getElementById('coffeeDropdown');
+  coffeeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    coffeeBtn.classList.toggle('open');
+    coffeeDropdown.classList.toggle('open');
+  });
+  document.addEventListener('click', () => {
+    coffeeBtn.classList.remove('open');
+    coffeeDropdown.classList.remove('open');
+  });
+</script>
+</body>
+</html>
