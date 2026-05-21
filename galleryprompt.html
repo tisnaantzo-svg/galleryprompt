@@ -612,133 +612,83 @@
 </footer>
 
 <script>
-  // ── DATA ──
-  const items = [
-    {
-      id: 1,
-      category: 'travel',
-      title: 'Bali Sunset Poster',
-      tool: 'Midjourney v6.1',
-      img: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80',
-      tags: ['Travel Poster', 'AI'],
-      prompt: 'A cinematic travel poster of Bali at golden hour sunset, silhouette of temple against dramatic orange-pink sky, rice terraces in foreground, vintage travel aesthetic, film grain, letterpress typography "BALI" at top, warm tones, high contrast, photorealistic, editorial style --ar 2:3 --v 6.1 --style raw'
-    },
-    {
-      id: 2,
-      category: 'streetwear',
-      title: 'Urban Streetwear Lookbook',
-      tool: 'Flux Pro 1.1',
-      img: 'https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=600&q=80',
-      tags: ['Streetwear', 'AI'],
-      prompt: 'Editorial fashion photography, young Indonesian male model wearing oversized graphic hoodie and cargo pants, urban Jakarta background with graffiti walls, moody dramatic lighting, desaturated cinematic colors, street photography style, shot on film, authentic gritty aesthetic, 4k resolution --ar 3:4'
-    },
-    {
-      id: 3,
-      category: 'portrait',
-      title: 'Analog Portrait Session',
-      tool: 'Midjourney v6.1',
-      img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80',
-      tags: ['Portrait', 'AI'],
-      prompt: 'Film photography portrait of Southeast Asian woman, natural light from window, analog film grain, Kodak Portra 400 aesthetic, soft bokeh background, candid expression, warm color grading, medium format camera feel, authentic intimate moment, no filters, raw emotion --ar 4:5 --v 6 --style raw --q 2'
-    },
-    {
-      id: 4,
-      category: 'travel',
-      title: 'Tokyo Night Poster',
-      tool: 'Adobe Firefly',
-      img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80',
-      tags: ['Travel Poster', 'AI'],
-      prompt: 'Neon-lit Tokyo at night, rain-soaked streets reflecting neon signs, cyberpunk aesthetic, overhead shot of Shinjuku crossing, vivid cyan and magenta color palette, long exposure light trails, cinematic anamorphic lens flare, Japanese text on signs, moody and atmospheric, poster format --ar 2:3'
-    },
-    {
-      id: 5,
-      category: 'nature',
-      title: 'Raja Ampat Aerial',
-      tool: 'Ideogram v2',
-      img: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&q=80',
-      tags: ['Nature', 'AI'],
-      prompt: 'Stunning aerial drone shot of Raja Ampat islands Indonesia, crystal clear turquoise water, limestone karst islands covered in dense jungle, overwater bungalow in distance, golden hour lighting, perfectly flat water with reflections, paradise tropical destination, ultra sharp details, Google Earth aesthetic --ar 16:9'
-    },
-    {
-      id: 6,
-      category: 'abstract',
-      title: 'Liquid Chrome Sculpture',
-      tool: 'Midjourney v6.1',
-      img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-      tags: ['Abstract', 'AI'],
-      prompt: 'Hyperrealistic liquid chrome mercury sculpture on black marble surface, dramatic studio lighting, perfect reflections, surreal organic form, high contrast, product photography style, glossy finish, 8k resolution, studio white backdrop, luxury aesthetic, premium material feel --ar 1:1 --v 6.1 --q 2'
-    },
-    {
-      id: 7,
-      category: 'streetwear',
-      title: 'Jogja Batik Fusion',
-      tool: 'Stable Diffusion XL',
-      img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80',
-      tags: ['Streetwear', 'AI'],
-      prompt: 'Contemporary fashion editorial, Indonesian model wearing modern streetwear with traditional batik pattern integration, Prambanan temple background, golden hour, Vogue magazine aesthetic, high fashion photography, dramatic poses, luxury brand feel, cultural fusion concept, professionally lit --ar 3:4'
-    },
-    {
-      id: 8,
-      category: 'nature',
-      title: 'Bromo Volcano Dawn',
-      tool: 'Midjourney v6.1',
-      img: 'https://images.unsplash.com/photo-1540276048-ca2ecdbf5c36?w=600&q=80',
-      tags: ['Nature', 'AI'],
-      prompt: 'Mount Bromo at dawn, sea of clouds below crater rim, dramatic volcanic landscape East Java Indonesia, warm golden first light, silhouette of local farmers on horseback, ethereal misty atmosphere, wide angle landscape photography, epic scale, National Geographic style, ultra detailed, 8k --ar 16:9 --style raw'
-    },
-    {
-      id: 9,
-      category: 'abstract',
-      title: 'Neon Geometry Burst',
-      tool: 'Flux Pro 1.1',
-      img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80',
-      tags: ['Abstract', 'AI'],
-      prompt: 'Abstract digital art, exploding geometric shapes, neon color spectrum on deep black background, mathematical precision, sacred geometry patterns, glowing edges with lens flare, cyberpunk palette cyan magenta yellow, motion blur, high energy composition, cover art aesthetic, 4k resolution --ar 1:1'
-    },
-    {
-      id: 10,
-      category: 'portrait',
-      title: 'Wayang Shadow Portrait',
-      tool: 'Ideogram v2',
-      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
-      tags: ['Portrait', 'AI'],
-      prompt: 'Dramatic portrait inspired by Indonesian wayang shadow puppet aesthetics, man in profile with strong geometric jawline, dramatic side lighting creating sharp shadows, traditional Javanese batik fabric as background, high contrast black and white with selective red accent color, artistic cultural fusion portrait --ar 4:5'
-    },
-    {
-      id: 11,
-      category: 'travel',
-      title: 'Sumatra Jungle Poster',
-      tool: 'Midjourney v6.1',
-      img: 'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=600&q=80',
-      tags: ['Travel Poster', 'AI'],
-      prompt: 'Vintage adventure travel poster of Sumatra jungle, orangutan in dense rainforest canopy, lush tropical greens, retro 1960s poster design style, limited color palette, bold typography "WILD SUMATRA", screen print texture, conservation message, artistic illustration style, warm earthy tones --ar 2:3'
-    },
-    {
-      id: 12,
-      category: 'nature',
-      title: 'Komodo Dragon Dusk',
-      tool: 'Adobe Firefly',
-      img: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=600&q=80',
-      tags: ['Nature', 'AI'],
-      prompt: 'Komodo dragon on rocky hillside at dusk, golden backlight creating dramatic silhouette, Komodo island Indonesia background, wildlife photography aesthetic, telephoto compression, dust particles visible in golden light, epic prehistoric atmosphere, David Attenborough documentary feel, cinematic wide shot --ar 16:9 --style raw'
-    }
+  // ── DATA — Ambil dari localStorage admin (tz_data), fallback ke data default ──
+  const FALLBACK_ITEMS = [
+    { id:1, category:'travel', title:'Bali Sunset Poster', tool:'Midjourney v6.1', img:'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80', tags:['Travel Poster','AI'], prompt:'A cinematic travel poster of Bali at golden hour sunset, silhouette of temple against dramatic orange-pink sky, rice terraces in foreground, vintage travel aesthetic, film grain, letterpress typography "BALI" at top, warm tones, high contrast, photorealistic, editorial style --ar 2:3 --v 6.1 --style raw' },
+    { id:2, category:'streetwear', title:'Urban Streetwear Lookbook', tool:'Flux Pro 1.1', img:'https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=600&q=80', tags:['Streetwear','AI'], prompt:'Editorial fashion photography, young Indonesian male model wearing oversized graphic hoodie and cargo pants, urban Jakarta background with graffiti walls, moody dramatic lighting, desaturated cinematic colors, street photography style, shot on film, authentic gritty aesthetic, 4k resolution --ar 3:4' },
+    { id:3, category:'portrait', title:'Analog Portrait Session', tool:'Midjourney v6.1', img:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80', tags:['Portrait','AI'], prompt:'Film photography portrait of Southeast Asian woman, natural light from window, analog film grain, Kodak Portra 400 aesthetic, soft bokeh background, candid expression, warm color grading, medium format camera feel, authentic intimate moment, no filters, raw emotion --ar 4:5 --v 6 --style raw --q 2' },
+    { id:4, category:'travel', title:'Tokyo Night Poster', tool:'Adobe Firefly', img:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80', tags:['Travel Poster','AI'], prompt:'Neon-lit Tokyo at night, rain-soaked streets reflecting neon signs, cyberpunk aesthetic, overhead shot of Shinjuku crossing, vivid cyan and magenta color palette, long exposure light trails, cinematic anamorphic lens flare, Japanese text on signs, moody and atmospheric, poster format --ar 2:3' },
+    { id:5, category:'nature', title:'Raja Ampat Aerial', tool:'Ideogram v2', img:'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&q=80', tags:['Nature','AI'], prompt:'Stunning aerial drone shot of Raja Ampat islands Indonesia, crystal clear turquoise water, limestone karst islands covered in dense jungle, overwater bungalow in distance, golden hour lighting, perfectly flat water with reflections, paradise tropical destination, ultra sharp details, Google Earth aesthetic --ar 16:9' },
+    { id:6, category:'abstract', title:'Liquid Chrome Sculpture', tool:'Midjourney v6.1', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', tags:['Abstract','AI'], prompt:'Hyperrealistic liquid chrome mercury sculpture on black marble surface, dramatic studio lighting, perfect reflections, surreal organic form, high contrast, product photography style, glossy finish, 8k resolution, studio white backdrop, luxury aesthetic, premium material feel --ar 1:1 --v 6.1 --q 2' },
+    { id:7, category:'streetwear', title:'Jogja Batik Fusion', tool:'Stable Diffusion XL', img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80', tags:['Streetwear','AI'], prompt:'Contemporary fashion editorial, Indonesian model wearing modern streetwear with traditional batik pattern integration, Prambanan temple background, golden hour, Vogue magazine aesthetic, high fashion photography, dramatic poses, luxury brand feel, cultural fusion concept, professionally lit --ar 3:4' },
+    { id:8, category:'nature', title:'Bromo Volcano Dawn', tool:'Midjourney v6.1', img:'https://images.unsplash.com/photo-1540276048-ca2ecdbf5c36?w=600&q=80', tags:['Nature','AI'], prompt:'Mount Bromo at dawn, sea of clouds below crater rim, dramatic volcanic landscape East Java Indonesia, warm golden first light, silhouette of local farmers on horseback, ethereal misty atmosphere, wide angle landscape photography, epic scale, National Geographic style, ultra detailed, 8k --ar 16:9 --style raw' },
+    { id:9, category:'abstract', title:'Neon Geometry Burst', tool:'Flux Pro 1.1', img:'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80', tags:['Abstract','AI'], prompt:'Abstract digital art, exploding geometric shapes, neon color spectrum on deep black background, mathematical precision, sacred geometry patterns, glowing edges with lens flare, cyberpunk palette cyan magenta yellow, motion blur, high energy composition, cover art aesthetic, 4k resolution --ar 1:1' },
+    { id:10, category:'portrait', title:'Wayang Shadow Portrait', tool:'Ideogram v2', img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80', tags:['Portrait','AI'], prompt:'Dramatic portrait inspired by Indonesian wayang shadow puppet aesthetics, man in profile with strong geometric jawline, dramatic side lighting creating sharp shadows, traditional Javanese batik fabric as background, high contrast black and white with selective red accent color, artistic cultural fusion portrait --ar 4:5' },
+    { id:11, category:'travel', title:'Sumatra Jungle Poster', tool:'Midjourney v6.1', img:'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=600&q=80', tags:['Travel Poster','AI'], prompt:'Vintage adventure travel poster of Sumatra jungle, orangutan in dense rainforest canopy, lush tropical greens, retro 1960s poster design style, limited color palette, bold typography "WILD SUMATRA", screen print texture, conservation message, artistic illustration style, warm earthy tones --ar 2:3' },
+    { id:12, category:'nature', title:'Komodo Dragon Dusk', tool:'Adobe Firefly', img:'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=600&q=80', tags:['Nature','AI'], prompt:'Komodo dragon on rocky hillside at dusk, golden backlight creating dramatic silhouette, Komodo island Indonesia background, wildlife photography aesthetic, telephoto compression, dust particles visible in golden light, epic prehistoric atmosphere, David Attenborough documentary feel, cinematic wide shot --ar 16:9 --style raw' }
   ];
+
+  // Mapping kategori/tool dari admin → category + tags untuk gallery
+  function adminToGallery(adminItem) {
+    const catMap = {
+      'Chatgpt': 'abstract', 'Gemini': 'abstract',
+      'Midjourney': 'abstract', 'Flux': 'abstract',
+      'Firefly': 'abstract', 'Ideogram': 'abstract',
+      'Stable Diffusion': 'abstract', 'Leonardo': 'abstract',
+      'Kling': 'abstract', 'Runway': 'abstract',
+      'Canva': 'abstract', 'Other': 'abstract'
+    };
+    return {
+      id: adminItem.id,
+      category: adminItem.category || catMap[adminItem.cat] || 'abstract',
+      title: adminItem.title,
+      tool: adminItem.cat || adminItem.tool || '',
+      img: adminItem.img || '',
+      tags: [adminItem.cat || adminItem.tool || 'AI', 'AI'],
+      prompt: adminItem.prompt
+    };
+  }
+
+  function loadItems() {
+    try {
+      const raw = localStorage.getItem('tz_data');
+      if (raw) {
+        const adminData = JSON.parse(raw);
+        if (Array.isArray(adminData) && adminData.length > 0) {
+          return adminData.map(adminToGallery);
+        }
+      }
+    } catch(e) {}
+    return FALLBACK_ITEMS;
+  }
+
+  let items = loadItems();
 
   // ── RENDER GRID ──
   let activeFilter = 'all';
   const grid = document.getElementById('galleryGrid');
 
   function renderCards(filter) {
+    items = loadItems(); // refresh dari localStorage setiap render
     const filtered = filter === 'all' ? items : items.filter(i => i.category === filter);
     grid.innerHTML = '';
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);font-size:14px;">Belum ada konten di kategori ini.</div>';
+      return;
+    }
+
     filtered.forEach((item, idx) => {
       const card = document.createElement('div');
       card.className = 'card';
       card.style.animationDelay = `${idx * 0.06}s`;
       card.dataset.id = item.id;
+      const imgHtml = item.img
+        ? `<img src="${item.img}" alt="${item.title}" loading="lazy" />`
+        : `<div style="width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--surface2);">🖼️</div>`;
       card.innerHTML = `
         <div class="card-img-wrap">
-          <img src="${item.img}" alt="${item.title}" loading="lazy" />
+          ${imgHtml}
           <div class="card-overlay">
             <span class="copy-hint">👁 Lihat Prompt</span>
           </div>
@@ -861,6 +811,14 @@
   document.addEventListener('click', () => {
     coffeeBtn.classList.remove('open');
     coffeeDropdown.classList.remove('open');
+  });
+
+  // ── SYNC: auto-refresh jika admin update data di tab lain ──
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'tz_data') {
+      items = loadItems();
+      renderCards(activeFilter);
+    }
   });
 </script>
 </body>
