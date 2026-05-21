@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ATC Creative — AI Prompt Gallery</title>
+  <title>tisnaantzo — AI Prompt Collection</title>
   <meta name="description" content="Koleksi visual AI lengkap dengan prompt aslinya. Klik untuk copy prompt." />
   <meta name="author" content="Tisnaantzo" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -323,7 +323,32 @@
       border-color: var(--accent);
       color: #0a0a0a;
       font-weight: 700;
+      box-shadow: 0 0 16px var(--accent-glow);
     }
+    .pill:active { transform: scale(0.93); }
+
+    /* hero subtitle */
+    .hero-subtitle {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: var(--muted2);
+      margin-top: 6px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    /* nav logo override */
+    .nav-logo-text span { color: var(--accent); }
+
+    /* card active press */
+    .card:active { transform: scale(0.97) translateY(0) !important; }
+
+    /* copy btn press */
+    .copy-btn:active { transform: scale(0.9); }
+    .btn-copy-full:active { transform: scale(0.97); }
+    .coffee-btn:active { transform: scale(0.97); }
+    .pill { transition: all 0.18s cubic-bezier(0.34,1.56,0.64,1); }
 
     /* ── DIVIDER ── */
     .section-divider {
@@ -716,8 +741,8 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">ATC</div>
-    <div class="nav-logo-text">CREATIVE</div>
+    <div class="nav-logo-mark">TZ</div>
+    <div class="nav-logo-text">tisna<span>antzo</span></div>
   </a>
   <div class="nav-right">
     <span class="nav-tag">AI PROMPTS</span>
@@ -726,11 +751,12 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Visual Prompt Collection</div>
+  <div class="hero-eyebrow">Prompt Collection</div>
   <h1 class="hero-title">
-    PROMPT
-    <span class="line2">GALLERY</span>
+    ATC
+    <span class="line2">CREATIVE</span>
   </h1>
+  <div class="hero-subtitle">PROMPT COLLECTION</div>
   <p class="hero-sub">Koleksi visual AI lengkap dengan prompt aslinya. Klik kartu untuk lihat & copy prompt secara penuh.</p>
 
   <div class="hero-stats" id="heroStats">
@@ -777,17 +803,22 @@
   </div>
   <div class="filter-pills">
     <button class="pill active" data-filter="all">Semua</button>
-    <button class="pill" data-filter="travel">Travel Poster</button>
-    <button class="pill" data-filter="streetwear">Streetwear</button>
-    <button class="pill" data-filter="portrait">Portrait</button>
-    <button class="pill" data-filter="nature">Nature</button>
-    <button class="pill" data-filter="abstract">Abstract</button>
+    <button class="pill" data-filter="Chatgpt">ChatGPT</button>
+    <button class="pill" data-filter="Gemini">Gemini</button>
+    <button class="pill" data-filter="Midjourney">Midjourney</button>
+    <button class="pill" data-filter="Flux">Flux Pro</button>
+    <button class="pill" data-filter="Firefly">Firefly</button>
+    <button class="pill" data-filter="Ideogram">Ideogram</button>
+    <button class="pill" data-filter="Stable Diffusion">Stable Diff</button>
+    <button class="pill" data-filter="Leonardo">Leonardo</button>
+    <button class="pill" data-filter="Kling">Kling</button>
+    <button class="pill" data-filter="Runway">Runway</button>
   </div>
 </div>
 
 <div class="section-divider">
   <div class="divider-line"></div>
-  <div class="divider-text">ATC Creative Library</div>
+  <div class="divider-text">tisnaantzo Library</div>
   <div class="divider-line"></div>
 </div>
 
@@ -826,7 +857,7 @@
 <footer>
   <div class="footer-top">
     <div>
-      <div class="footer-brand">ATC <span>CREATIVE</span></div>
+      <div class="footer-brand">tisna<span>antzo</span></div>
       <div class="footer-tagline">AI Visual & Prompt Assets</div>
     </div>
     <nav class="footer-links">
@@ -836,7 +867,7 @@
     </nav>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2025 ATC CREATIVE — TISNAANTZO</div>
+    <div class="footer-copy">© 2025 TISNAANTZO — ALL RIGHTS RESERVED</div>
     <div class="footer-dot"></div>
   </div>
 </footer>
@@ -903,7 +934,7 @@
 
   function renderCards(filter) {
     items = loadItems();
-    const filtered = filter === 'all' ? items : items.filter(i => i.category === filter);
+    const filtered = filter === 'all' ? items : items.filter(i => (i.tool||'').toLowerCase().includes(filter.toLowerCase()) || (i.cat||'').toLowerCase().includes(filter.toLowerCase()));
     grid.innerHTML = '';
     updateStats(filtered);
 
