@@ -469,7 +469,7 @@ async function uploadToCloudinary(file) {
 }
 
 // ── AUTH ──
-let storedPass = localStorage.getItem('tz_pass') || 'tisna123';
+localStorage.removeItem('tz_pass'); let storedPass = localStorage.getItem('tz_pass') || 'tisna123';
 
 function doLogin(){
   const u = document.getElementById('lUser').value.trim();
