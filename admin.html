@@ -431,7 +431,23 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 
 <div class="toasts" id="toasts"></div>
 
-<script>
+<script type="module">
+// ── FIREBASE ──
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAmIv86EktQmjRUPoqMvuZPTNqzI5K6wrA",
+  authDomain: "tisnaantzo-605a2.firebaseapp.com",
+  projectId: "tisnaantzo-605a2",
+  storageBucket: "tisnaantzo-605a2.appspot.com",
+  messagingSenderId: "471757399915",
+  appId: "1:471757399915:web:df776b8e3c2a1234abcdef",
+  measurementId: "G-B0V9F63WD3"
+};
+const fbApp = initializeApp(firebaseConfig);
+const db = getFirestore(fbApp);
+
 // ── CLOUDINARY CONFIG ──
 const CLD = {
   cloudName:    'CLOUD_NAME_KAMU',      // ← ganti dengan Cloud Name kamu
@@ -490,8 +506,19 @@ const DEFAULTS=[
   {id:2,title:'Street Style Arts',cat:'Chatgpt',img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=300&q=70',prompt:'Use the uploaded image as reference. Full-body fashion editorial street style...'},
   {id:3,title:'Streetwear Yellow Doodle',cat:'Chatgpt',img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&q=70',prompt:'Ultra realistic artistic doodle streetwear concept, yellow tones, graffiti background...'},
 ];
-function getData(){const r=localStorage.getItem('tz_data');return r?JSON.parse(r):[...DEFAULTS];}
-function setData(d){localStorage.setItem('tz_data',JSON.stringify(d));}
+// Firebase getData & setData
+let _cachedData = [];
+async function getData() { return _cachedData; }
+async function setData(d) {
+  // Save all items to Firestore
+  const col = collection(db, 'prompts');
+  // Delete all then re-add (simple approach)
+  const existing = await getDocs(col);
+  const deletePromises = existing.docs.map(dc => deleteDoc(dc.ref));
+  await Promise.all(deletePromises);
+  const savePromises = d.map(item => setDoc(doc(col, String(item.id)), item));
+  await Promise.all(savePromises);
+}
 function nextId(){const d=getData();return d.length?Math.max(...d.map(i=>i.id))+1:1;}
 
 // ── NAV ──
@@ -509,7 +536,7 @@ function switchPage(p){
 
 // ── RENDER DASH ──
 function renderDash(){
-  const d=getData();
+  const d=await getData();
   document.getElementById('dTotal').textContent=d.length;
   document.getElementById('dImg').textContent=d.filter(i=>i.img).length;
   const recent=[...d].reverse().slice(0,8);
@@ -593,7 +620,7 @@ function resetForm(){
   document.getElementById('fileInp').value='';
   imgData=null; hidePreview(); setUploadStatus('hide');
 }
-function saveItem(){
+async function saveItem(){
   const title=document.getElementById('fTitle').value.trim();
   const cat=document.getElementById('fCat').value;
   const category=document.getElementById('fCategory').value;
@@ -610,7 +637,7 @@ function saveItem(){
     d.push({id:nextId(),title,cat,category,img,prompt});
     toast('Konten ditambahkan!','ok');
   }
-  setData(d);closeSheet();refresh();
+  await setData(d);closeSheet();refresh();
 }
 
 // ── IMAGE ──
