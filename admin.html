@@ -803,6 +803,28 @@ function showCldStatus(msg, type) {
 // ── INIT ──
 loadCldConfig();
 refresh();
+
+  // ── EXPOSE FUNCTIONS TO WINDOW (fix type="module" onclick) ──
+  window.doLogin = doLogin;
+  window.doLogout = doLogout;
+  window.switchPage = switchPage;
+  window.openSheet = openSheet;
+  window.closeSheet = closeSheet;
+  window.saveItem = saveItem;
+  window.editItem = editItem;
+  window.askDel = askDel;
+  window.confirmDel = confirmDel;
+  window.closeConf = closeConf;
+  window.askClear = askClear;
+  window.confirmClear = confirmClear;
+  window.closeClearConf = closeClearConf;
+  window.removeImg = removeImg;
+  window.changePass = changePass;
+  window.saveCldConfig = saveCldConfig;
+  window.testCldConnection = testCldConnection;
+  window.copyExport = copyExport;
+  window.downloadJSON = downloadJSON;
+  window.onFileChange = onFileChange;
 </script>
 </body>
 </html>
