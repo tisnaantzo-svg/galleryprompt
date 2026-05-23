@@ -602,7 +602,7 @@ function saveItem(){
     d.push({id:nextId(),title,cat,img,prompt});
     toast('Konten ditambahkan!','ok');
   }
-  setData(d);closeSheet();refresh();
+  setData(d);closeSheet();refresh();syncToFirebase();
 }
 
 // ── IMAGE ──
