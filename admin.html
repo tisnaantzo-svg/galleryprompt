@@ -33,7 +33,7 @@
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;padding-bottom:var(--nav-h);}
 
 /* LOGIN */
-#loginWrap{display:none!important;}
+#loginWrap{display:none!important;position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;z-index:999;padding:24px;}
 .login-box{background:var(--panel);border:1px solid var(--border2);border-radius:20px;padding:36px 28px;width:100%;max-width:340px;}
 .login-logo{font-family:var(--display);font-size:22px;font-weight:800;margin-bottom:4px;}
 .login-logo b{color:var(--accent);}
@@ -192,8 +192,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 @keyframes tst{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tfade{to{opacity:0}}
 </style>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -345,7 +343,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
         <input class="finput" id="fTitle" placeholder="Contoh: Bali Sunset Poster"/>
       </div>
       <div class="fg">
-        <label class="flbl">Tools AI <span>*</span></label>
+        <label class="flbl">Kategori / Tools AI <span>*</span></label>
         <select class="fsel" id="fCat">
           <option value="">-- Pilih Tools AI --</option>
           <option value="Chatgpt">ChatGPT / DALL·E</option>
@@ -361,18 +359,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
           <option value="Canva">Canva AI</option>
           <option value="Other">Lainnya</option>
         </select>
-      </div>
-      <div class="fg">
-        <label class="flbl">Kategori Gallery <span>*</span></label>
-        <select class="fsel" id="fCategory">
-          <option value="">-- Pilih Kategori --</option>
-          <option value="travel">Travel Poster</option>
-          <option value="streetwear">Streetwear</option>
-          <option value="portrait">Portrait</option>
-          <option value="nature">Nature</option>
-          <option value="abstract">Abstract</option>
-        </select>
-        <div class="fhint">Dipakai untuk filter di halaman Gallery Prompt</div>
       </div>
       <div class="fg">
         <label class="flbl">Prompt <span>*</span></label>
@@ -434,19 +420,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 <div class="toasts" id="toasts"></div>
 
 <script>
-// ── FIREBASE ──
-const firebaseConfig = {
-  apiKey: "AIzaSyAmIv86EktQmjRUPoqM2SpSkzd031UnazU",
-  authDomain: "tisnaantzo-605a2.firebaseapp.com",
-  projectId: "tisnaantzo-605a2",
-  storageBucket: "tisnaantzo-605a2.firebasestorage.app",
-  messagingSenderId: "471757399915",
-  appId: "1:471757399915:web:df776bfbada74ae9f9ce2e",
-  measurementId: "G-B0V9F63WD3"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
 // ── CLOUDINARY CONFIG ──
 const CLD = {
   cloudName:    'CLOUD_NAME_KAMU',      // ← ganti dengan Cloud Name kamu
@@ -468,15 +441,18 @@ async function uploadToCloudinary(file) {
 }
 
 // ── AUTH ──
-localStorage.removeItem('tz_pass'); let storedPass = localStorage.getItem('tz_pass') || 'tisna123';
+let storedPass = localStorage.getItem('tz_pass') || 'tisna123';
 
 function doLogin(){
-  document.getElementById('loginWrap').style.display='none';
-  document.getElementById('app').classList.add('show');
-  db.collection('prompts').orderBy('id','asc').onSnapshot((snapshot) => {
-    _cachedData = snapshot.docs.map(dc => dc.data());
+  if(true){
+    document.getElementById('loginWrap').style.display='none';
+    document.getElementById('app').classList.add('show');
     refresh();
-  });
+  } else {
+    const el=document.getElementById('lErr');
+    el.style.display='block';
+    setTimeout(()=>el.style.display='none',2500);
+  }
 }
 document.getElementById('lPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 document.getElementById('lUser').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
@@ -500,14 +476,8 @@ const DEFAULTS=[
   {id:2,title:'Street Style Arts',cat:'Chatgpt',img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=300&q=70',prompt:'Use the uploaded image as reference. Full-body fashion editorial street style...'},
   {id:3,title:'Streetwear Yellow Doodle',cat:'Chatgpt',img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&q=70',prompt:'Ultra realistic artistic doodle streetwear concept, yellow tones, graffiti background...'},
 ];
-let _cachedData = [];
-async function getData() { return _cachedData; }
-async function setData(d) {
-  const col = db.collection('prompts');
-  const existing = await col.get();
-  await Promise.all(existing.docs.map(dc => dc.ref.delete()));
-  await Promise.all(d.map(item => col.doc(String(item.id)).set(item)));
-}
+function getData(){const r=localStorage.getItem('tz_data');return r?JSON.parse(r):[...DEFAULTS];}
+function setData(d){localStorage.setItem('tz_data',JSON.stringify(d));}
 function nextId(){const d=getData();return d.length?Math.max(...d.map(i=>i.id))+1:1;}
 
 // ── NAV ──
@@ -525,7 +495,7 @@ function switchPage(p){
 
 // ── RENDER DASH ──
 function renderDash(){
-  const d=await getData();
+  const d=getData();
   document.getElementById('dTotal').textContent=d.length;
   document.getElementById('dImg').textContent=d.filter(i=>i.img).length;
   const recent=[...d].reverse().slice(0,8);
@@ -595,7 +565,6 @@ function openSheet(id=null){
       document.getElementById('fCat').value=item.cat;
       document.getElementById('fPrompt').value=item.prompt;
       document.getElementById('fImgUrl').value=item.img||'';
-      document.getElementById('fCategory').value=item.category||'';
       if(item.img)showPreview(item.img);
     }
   } else {
@@ -605,28 +574,27 @@ function openSheet(id=null){
 }
 function closeSheet(){document.getElementById('sheetOverlay').classList.remove('open');editId=null;imgData=null;resetForm();}
 function resetForm(){
-  ['fTitle','fCat','fCategory','fPrompt','fImgUrl','fId'].forEach(id=>document.getElementById(id).value='');
+  ['fTitle','fCat','fPrompt','fImgUrl','fId'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('fileInp').value='';
   imgData=null; hidePreview(); setUploadStatus('hide');
 }
-async function saveItem(){
+function saveItem(){
   const title=document.getElementById('fTitle').value.trim();
   const cat=document.getElementById('fCat').value;
-  const category=document.getElementById('fCategory').value;
   const prompt=document.getElementById('fPrompt').value.trim();
   const imgUrl=document.getElementById('fImgUrl').value.trim();
-  if(!title||!cat||!category||!prompt){toast('Isi semua field wajib!','err');return;}
+  if(!title||!cat||!prompt){toast('Isi semua field wajib!','err');return;}
   const img=imgData||imgUrl||'';
   const d=getData();
   if(editId!==null){
     const idx=d.findIndex(i=>i.id===editId);
-    if(idx!==-1)d[idx]={...d[idx],title,cat,category,prompt,img};
+    if(idx!==-1)d[idx]={...d[idx],title,cat,prompt,img};
     toast('Konten diupdate!','ok');
   } else {
-    d.push({id:nextId(),title,cat,category,img,prompt});
+    d.push({id:nextId(),title,cat,img,prompt});
     toast('Konten ditambahkan!','ok');
   }
-  await setData(d);closeSheet();refresh();
+  setData(d);closeSheet();refresh();
 }
 
 // ── IMAGE ──
@@ -792,30 +760,6 @@ function showCldStatus(msg, type) {
 // ── INIT ──
 loadCldConfig();
 refresh();
-
-  // ── EXPOSE FUNCTIONS TO WINDOW (fix type="module" onclick) ──
-  window.doLogin = doLogin;
-  window.saveItem = saveItem;
-  window.delItem = delItem;
-  window.doLogout = doLogout;
-  window.switchPage = switchPage;
-  window.openSheet = openSheet;
-  window.closeSheet = closeSheet;
-  window.saveItem = saveItem;
-  window.editItem = editItem;
-  window.askDel = askDel;
-  window.confirmDel = confirmDel;
-  window.closeConf = closeConf;
-  window.askClear = askClear;
-  window.confirmClear = confirmClear;
-  window.closeClearConf = closeClearConf;
-  window.removeImg = removeImg;
-  window.changePass = changePass;
-  window.saveCldConfig = saveCldConfig;
-  window.testCldConnection = testCldConnection;
-  window.copyExport = copyExport;
-  window.downloadJSON = downloadJSON;
-  window.onFileChange = onFileChange;
 </script>
 </body>
 </html>
